@@ -1,4 +1,5 @@
 import { Circle } from "./Circle";
+import { Paddle } from "./Paddle";
 import { Rectangle } from "./Rectangle";
 
 export function checkCircleCollision(ball1: Circle, ball2: Circle) {
@@ -29,7 +30,11 @@ export function checkCircleCollision(ball1: Circle, ball2: Circle) {
   }
 }
 
-export function checkCollisionCircleRectangle(circle: Circle, rect: Rectangle) {
+export function checkCollisionCircleRectangle(
+  circle: Circle,
+  rect: Rectangle | Paddle
+) {
+  let isCollided = false;
   // Find the closest point on the rectangle to the circle's center
   let closestX = Math.max(rect.x, Math.min(circle.x, rect.x + rect.width));
   let closestY = Math.max(rect.y, Math.min(circle.y, rect.y + rect.height));
@@ -41,6 +46,7 @@ export function checkCollisionCircleRectangle(circle: Circle, rect: Rectangle) {
 
   // Check if the distance is less than or equal to the circle's radius
   if (distance <= circle.radius) {
+    isCollided = true;
     // Calculate the normal vector from the rectangle's edge to the circle's center
     let normalX = distanceX / distance;
     let normalY = distanceY / distance;
@@ -60,4 +66,6 @@ export function checkCollisionCircleRectangle(circle: Circle, rect: Rectangle) {
     circle.dx += deltaVelocityX;
     circle.dy += deltaVelocityY;
   }
+
+  return isCollided;
 }

@@ -7,6 +7,8 @@ export class Rectangle {
   dy: number;
   color: string;
 
+  #isHit: boolean = false;
+
   static #ctx: CanvasRenderingContext2D;
 
   constructor(
@@ -28,16 +30,22 @@ export class Rectangle {
   }
 
   draw() {
-    Rectangle.#ctx.beginPath();
-    Rectangle.#ctx.rect(this.x, this.y, this.width, this.height);
-    Rectangle.#ctx.fillStyle = this.color;
-    Rectangle.#ctx.fill();
-    Rectangle.#ctx.stroke();
-    Rectangle.#ctx.closePath();
+    if (!this.#isHit) {
+      Rectangle.#ctx.beginPath();
+      Rectangle.#ctx.rect(this.x, this.y, this.width, this.height);
+      Rectangle.#ctx.fillStyle = this.color;
+      Rectangle.#ctx.fill();
+      Rectangle.#ctx.stroke();
+      Rectangle.#ctx.closePath();
+    }
   }
 
   update() {
     this.draw();
+  }
+
+  setIsHit() {
+    this.#isHit = true;
   }
 
   static setContext2D(ctx: CanvasRenderingContext2D) {

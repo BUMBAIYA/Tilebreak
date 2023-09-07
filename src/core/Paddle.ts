@@ -39,11 +39,8 @@ export class Paddle {
     Paddle.#ctx.rect(this.x, this.y, this.width, this.height);
     Paddle.#ctx.fillStyle = this.color;
     Paddle.#ctx.fill();
+    Paddle.#ctx.stroke();
     Paddle.#ctx.closePath();
-  }
-
-  update() {
-    this.draw();
   }
 
   move(direction: PaddleDirection) {

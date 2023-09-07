@@ -52,8 +52,6 @@ export class Circle {
     ) {
       this.dy *= -1;
     }
-
-    this.draw();
   }
 
   static setContext2D(ctx: CanvasRenderingContext2D) {

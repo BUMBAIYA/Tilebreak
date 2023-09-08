@@ -50,7 +50,7 @@ function populateCanvas() {
   paddle = new Paddle(
     paddleWidth,
     25,
-    canvasWidth / 2 - paddleWidth,
+    canvasWidth / 2 - paddleWidth / 2,
     canvasHeight - 50,
     PADDLE_SPEED,
     0,
@@ -158,6 +158,9 @@ window.addEventListener("keydown", (event) => {
       break;
     }
     case " ": {
+      if (gameState === GameState.END) {
+        break;
+      }
       if (gameState === GameState.START) {
         gameState = GameState.PAUSE;
         pauseGame();
